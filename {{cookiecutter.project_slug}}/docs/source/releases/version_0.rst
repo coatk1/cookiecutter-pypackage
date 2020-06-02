@@ -2,7 +2,7 @@
 Version 0.x Series
 ==================
 
-{{ cookiecutter.version }}
+{{ cookiecutter.version }} {% now 'local', '%d %b, %Y' %}
 ======================
 
 Bug Fixes

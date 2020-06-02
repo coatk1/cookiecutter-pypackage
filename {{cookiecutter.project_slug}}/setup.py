@@ -24,8 +24,8 @@ import versioneer
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
+# with open('HISTORY.rst') as history_file:
+#     history = history_file.read()
 
 COMMAND_NAME='{{ cookiecutter.project_slug }}'
 
@@ -83,8 +83,8 @@ setup(
     #
     # This field corresponds to the "Description" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#description-optional
-    # long_description=readme,
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
+    # long_description=readme + '\n\n' + history,
     long_description_content_type='text/x-rst',
 
     # This should be a valid link to your project's main homepage.
@@ -223,7 +223,7 @@ setup(
     {%- if 'no' not in cookiecutter.command_line_interface|lower %}
     entry_points={
         'console_scripts': [
-            '{} = {{ cookiecutter.project_slug }}.cli:main'.format(COMMAND_NAME)
+            '{} = {{ cookiecutter.project_slug }}.cli:cli'.format(COMMAND_NAME)
             #'{{ cookiecutter.project_slug }}={{ cookiecutter.project_slug }}.cli:main',
         ],
     },
