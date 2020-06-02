@@ -5,14 +5,17 @@ pushd %~dp0
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=python -msphinx
+	set SPHINXBUILD=sphinx-build
 )
-set SOURCEDIR=.
-set BUILDDIR=_build
-set SPHINXPROJ={{ cookiecutter.project_slug }}
+set SOURCEDIR=source
+set BUILDDIR=build
+set PYTHONWARNINGS=
+:: set ALLSPHINXOPTS=-d %BUILDDIR%/doctrees %SPHINXOPTS% source
+:: set SPHINXPROJ={{ cookiecutter.project_slug }}
 
 if "%1" == "" goto help
 
+REM Check for sphinx-build
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
 	echo.
@@ -25,6 +28,29 @@ if errorlevel 9009 (
 	echo.http://sphinx-doc.org/
 	exit /b 1
 )
+
+::if "%1" == "clean" (
+::	for /d %%i in (%BUILDDIR%\*) do rmdir /q /s %%i
+::	del /q /s %BUILDDIR%\*
+::	goto end
+::)
+
+::if "%1" == "html" (
+::	%SPHINXBUILD% -b html %ALLSPHINXOPTS% %BUILDDIR%/html
+::	if errorlevel 1 exit /b 1
+::	echo.
+::	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
+::	goto end
+::)
+
+::if "%1" == "doctest" (
+::	%SPHINXBUILD% -b doctest %ALLSPHINXOPTS% %BUILDDIR%/doctest
+::	if errorlevel 1 exit /b 1
+::	echo.
+::	echo.Testing of doctests in the sources finished, look at the ^
+::results in %BUILDDIR%/doctest/output.txt.
+::	goto end
+::)
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS%
 goto end
